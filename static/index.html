@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI CORS Example</title>
+</head>
+
+<body>
+    <h1>FastAPI CORS Example</h1>
+    <button id="fetchDataBtn">Fetch Data from FastAPI</button>
+    <div id="response"></div>
+
+    <script>
+        // URL of the FastAPI backend
+        const apiUrl = "http://test.sam.com:1865/plugins/settings";
+
+        // Fetch data from the FastAPI backend
+        document.getElementById("fetchDataBtn").addEventListener("click", () => {
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse JSON response
+                })
+                .then(data => {
+                    // Display the response data in the HTML page
+                    document.getElementById("response").innerText = JSON.stringify(data);
+                })
+                .catch(error => {
+                    document.getElementById("response").innerText = 'Error: ' + error;
+                });
+        });
+    </script>
+</body>
+
+</html>
